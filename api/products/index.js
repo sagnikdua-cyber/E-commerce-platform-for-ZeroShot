@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
       let filter = {};
       if (category) filter.category = category;
       if (brand) filter.brand = brand;
-      if (inStock === 'true') filter.countInStock = { $gt: 0 };
+      if (inStock === 'true') filter.stock = { $gt: 0 };
       if (search) filter.name = { $regex: search, $options: 'i' };
 
       let sortObj = {};
