@@ -1,4 +1,4 @@
-const { connectDB, Product } = require('../../_db');
+const { connectDB, Product } = require('../_db');
 const jwt = require('jsonwebtoken');
 
 function verifyAuth(req) {
