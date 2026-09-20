@@ -1,4 +1,4 @@
-const app = require('../app');
+const app = require('../server/app');
 const mongoose = require('mongoose');
 
 // Cached connection for Vercel Serverless environment
