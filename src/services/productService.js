@@ -1,4 +1,4 @@
-const API_URL = (import.meta.env.VITE_API_URL || '/api') + '/products/';
+const API_URL = (import.meta.env.VITE_API_URL || '/api') + '/products';
 
 const getAuthHeaders = () => {
   const storedData = localStorage.getItem('adminToken');
@@ -36,7 +36,7 @@ export const getProducts = async (params = {}) => {
 
 // Public
 export const getProductById = async (id) => {
-  const response = await fetch(`${API_URL}${id}`);
+  const response = await fetch(`${API_URL}/${id}`);
   if (!response.ok) throw new Error('Failed to fetch product');
   return response.json();
 };
@@ -55,7 +55,7 @@ export const createProduct = async (productData) => {
 
 // Protected Admin
 export const updateProduct = async (id, productData) => {
-  const response = await fetch(`${API_URL}${id}`, {
+  const response = await fetch(`${API_URL}/${id}`, {
     method: 'PUT',
     headers: getAuthHeaders(),
     body: JSON.stringify(productData),
@@ -67,7 +67,7 @@ export const updateProduct = async (id, productData) => {
 
 // Protected Admin
 export const deleteProduct = async (id) => {
-  const response = await fetch(`${API_URL}${id}`, {
+  const response = await fetch(`${API_URL}/${id}`, {
     method: 'DELETE',
     headers: getAuthHeaders(),
   });
