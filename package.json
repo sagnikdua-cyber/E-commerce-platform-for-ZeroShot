@@ -1,11 +1,19 @@
 {
-  "name": "shopnexus-monorepo",
-  "version": "1.0.0",
+  "name": "client-temp",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "cd client && npm install && npm run build && cd .. && rm -rf public && cp -r client/dist public"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "oxlint",
+    "preview": "vite preview"
   },
   "dependencies": {
+    "lucide-react": "^1.47.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.4",
     "bcryptjs": "^3.0.3",
     "cloudinary": "^1.41.3",
     "cors": "^2.8.6",
@@ -15,5 +23,15 @@
     "mongoose": "^9.10.1",
     "multer": "^2.4.0",
     "multer-storage-cloudinary": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "autoprefixer": "^10.6.1",
+    "oxlint": "^1.81.0",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.3.0"
   }
 }
