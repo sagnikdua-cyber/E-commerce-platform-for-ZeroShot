@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL + '/products/';
+const API_URL = (import.meta.env.VITE_API_URL || '/api') + '/products/';
 
 const getAuthHeaders = () => {
   const storedData = localStorage.getItem('adminToken');
@@ -83,7 +83,7 @@ export const uploadImage = async (file) => {
   const formData = new FormData();
   formData.append('image', file);
 
-  const UPLOAD_URL = import.meta.env.VITE_API_URL + '/upload';
+  const UPLOAD_URL = (import.meta.env.VITE_API_URL || '/api') + '/upload';
   const response = await fetch(UPLOAD_URL, {
     method: 'POST',
     headers: getAuthHeadersForm(),
