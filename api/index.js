@@ -1,20 +1,10 @@
 const mongoose = require('mongoose');
+const { parse } = require('url');
 
 let isConnected = false;
 let app = null;
 
 module.exports = async (req, res) => {
-  // Vercel rewrites /api/:path* → /api/index.js?path=...
-  // We must reconstruct the original URL so Express can route correctly
-  if (req.query && req.query.path) {
-    const pathParts = Array.isArray(req.query.path)
-      ? req.query.path.join('/')
-      : req.query.path;
-    const { path: _, ...restQuery } = req.query;
-    const queryString = new URLSearchParams(restQuery).toString();
-    req.url = `/api/${pathParts}${queryString ? '?' + queryString : ''}`;
-  }
-
   // Lazy-load Express app
   if (!app) {
     try {
