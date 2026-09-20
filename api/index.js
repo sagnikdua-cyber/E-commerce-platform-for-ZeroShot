@@ -1,17 +1,14 @@
-import { createRequire } from 'module';
-import { connect, connection } from 'mongoose';
-
-const require = createRequire(import.meta.url);
 const app = require('../server/app');
+const mongoose = require('mongoose');
 
 // Cached connection for Vercel Serverless environment
 let isConnected = false;
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   if (!isConnected) {
     try {
-      if (connection.readyState !== 1) {
-        await connect(process.env.MONGO_URI);
+      if (mongoose.connection.readyState !== 1) {
+        await mongoose.connect(process.env.MONGO_URI);
       }
       isConnected = true;
       console.log('MongoDB connected for serverless function');
@@ -24,4 +21,4 @@ export default async function handler(req, res) {
 
   // Forward to Express app
   return app(req, res);
-}
+};
