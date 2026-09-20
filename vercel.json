@@ -20,11 +20,15 @@
     },
     {
       "source": "/assets/(.*)",
-      "destination": "/client/dist/assets/$1"
+      "destination": "/client/assets/$1"
+    },
+    {
+      "source": "/products/(.*)",
+      "destination": "/client/products/$1"
     },
     {
       "source": "/(.*)",
-      "destination": "/client/dist/index.html"
+      "destination": "/client/index.html"
     }
   ]
 }
