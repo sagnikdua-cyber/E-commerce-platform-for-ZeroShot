@@ -22,6 +22,12 @@ const ProductCard = ({ product }) => {
             </Link>
           </h3>
           <p className="text-sm text-gray-500 mb-2">{product.brand}</p>
+          {(product.dimensions || product.weight) && (
+            <div className="text-xs text-gray-400 space-y-1">
+              {product.dimensions && <p>Dimensions: {product.dimensions}</p>}
+              {product.weight && <p>Weight: {product.weight} kg</p>}
+            </div>
+          )}
         </div>
         <div className="flex items-center justify-between mt-4">
           <p className="text-lg font-bold text-gray-900">

@@ -14,6 +14,8 @@ const productSchema = new mongoose.Schema(
     brand: { type: String, required: true },
     image: { type: String, required: true },
     sku: { type: String, required: true, unique: true },
+    dimensions: { type: String },
+    weight: { type: Number, min: 0 },
   },
   { timestamps: true }
 );

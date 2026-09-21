@@ -13,6 +13,8 @@ const ProductForm = ({ initialData, onSubmit, isLoading }) => {
     brand: '',
     sku: '',
     image: '',
+    dimensions: '',
+    weight: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -32,6 +34,8 @@ const ProductForm = ({ initialData, onSubmit, isLoading }) => {
         brand: initialData.brand || '',
         sku: initialData.sku || '',
         image: initialData.image || '',
+        dimensions: initialData.dimensions || '',
+        weight: initialData.weight || '',
       });
     }
   }, [initialData]);
@@ -92,7 +96,8 @@ const ProductForm = ({ initialData, onSubmit, isLoading }) => {
         ...formData,
         price: Number(formData.price),
         stock: Number(formData.stock),
-        rating: Number(formData.rating)
+        rating: Number(formData.rating),
+        weight: formData.weight !== '' ? Number(formData.weight) : undefined
       });
     }
   };
@@ -161,6 +166,22 @@ const ProductForm = ({ initialData, onSubmit, isLoading }) => {
           <label htmlFor="brand" className="block text-sm font-medium text-gray-700">Brand</label>
           <div className="mt-1">
             <input type="text" name="brand" id="brand" value={formData.brand} onChange={handleChange}
+              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
+          </div>
+        </div>
+
+        <div className="sm:col-span-3">
+          <label htmlFor="dimensions" className="block text-sm font-medium text-gray-700">Dimensions (Size)</label>
+          <div className="mt-1">
+            <input type="text" name="dimensions" id="dimensions" value={formData.dimensions} onChange={handleChange} placeholder="e.g. 10x20x5 cm"
+              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
+          </div>
+        </div>
+
+        <div className="sm:col-span-3">
+          <label htmlFor="weight" className="block text-sm font-medium text-gray-700">Weight (kg)</label>
+          <div className="mt-1">
+            <input type="number" step="0.01" min="0" name="weight" id="weight" value={formData.weight} onChange={handleChange} placeholder="e.g. 1.5"
               className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" />
           </div>
         </div>

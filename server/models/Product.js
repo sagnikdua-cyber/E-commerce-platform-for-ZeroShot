@@ -41,16 +41,23 @@ const productSchema = new mongoose.Schema(
     },
     brand: {
       type: String,
-      required: [true, 'Product brand is required'],
+      required: [true, 'Please add a brand'],
     },
     image: {
       type: String,
-      required: [true, 'Product image URL/path is required'],
+      required: [true, 'Please add an image URL'],
     },
     sku: {
       type: String,
-      required: [true, 'Product SKU is required'],
+      required: [true, 'Please add a SKU'],
       unique: true,
+    },
+    dimensions: {
+      type: String,
+    },
+    weight: {
+      type: Number,
+      min: [0, 'Weight must be at least 0'],
     },
   },
   {

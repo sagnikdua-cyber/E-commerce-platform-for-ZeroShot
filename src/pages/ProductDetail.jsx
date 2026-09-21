@@ -91,6 +91,16 @@ const ProductDetail = () => {
               <div className="flex items-center text-sm text-gray-500">
                 <span className="font-medium text-gray-900 mr-2">Category:</span> {product.category}
               </div>
+              {product.dimensions && (
+                <div className="flex items-center text-sm text-gray-500">
+                  <span className="font-medium text-gray-900 mr-2">Dimensions:</span> {product.dimensions}
+                </div>
+              )}
+              {product.weight && (
+                <div className="flex items-center text-sm text-gray-500">
+                  <span className="font-medium text-gray-900 mr-2">Weight:</span> {product.weight} kg
+                </div>
+              )}
               <div className="flex items-center text-sm text-gray-500">
                 <span className="font-medium text-gray-900 mr-2">Availability:</span> 
                 <span className={product.stock > 0 ? "text-green-600" : "text-red-600"}>
