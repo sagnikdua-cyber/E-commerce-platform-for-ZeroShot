@@ -1,17 +1,18 @@
-const cloudinary = require('cloudinary').v2;
-const multer = require('multer');
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const jwt = require('jsonwebtoken');
+import cloudinaryPkg from 'cloudinary';
+const cloudinary = cloudinaryPkg.v2;
+import multer from 'multer';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import jwt from 'jsonwebtoken';
 
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME?.trim(),
+  api_key: process.env.CLOUDINARY_API_KEY?.trim(),
+  api_secret: process.env.CLOUDINARY_API_SECRET?.trim(),
 });
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: { folder: 'shopnexus', allowed_formats: ['jpg', 'jpeg', 'png', 'webp'] },
+  params: { folder: 'shopnexus', allowedFormats: ['jpg', 'jpeg', 'png', 'webp'] },
 });
 
 const upload = multer({ storage });
@@ -23,7 +24,13 @@ const runMiddleware = (req, res, fn) => new Promise((resolve, reject) => {
   });
 });
 
-module.exports = async (req, res) => {
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
@@ -39,8 +46,11 @@ module.exports = async (req, res) => {
   try {
     await runMiddleware(req, res, upload.single('image'));
     if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
-    return res.json({ url: req.file.path });
+    return res.json({ 
+      message: 'Image uploaded successfully',
+      imageUrl: req.file.path 
+    });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-};
+}

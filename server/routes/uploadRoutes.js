@@ -28,7 +28,7 @@ const upload = multer({
 // @route   POST /api/upload
 // @access  Private (Admin)
 router.post('/', protect, upload.single('image'), (req, res) => {
-  if (!req.file) {
+  console.log(req.file); if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded or invalid file format' });
   }
 
