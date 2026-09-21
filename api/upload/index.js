@@ -1,8 +1,7 @@
-import cloudinaryPkg from 'cloudinary';
-const cloudinary = cloudinaryPkg.v2;
-import multer from 'multer';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
-import jwt from 'jsonwebtoken';
+const cloudinary = require('cloudinary').v2;
+const multer = require('multer');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const jwt = require('jsonwebtoken');
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME?.trim(),
@@ -24,13 +23,7 @@ const runMiddleware = (req, res, fn) => new Promise((resolve, reject) => {
   });
 });
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
@@ -53,4 +46,4 @@ export default async function handler(req, res) {
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-}
+};
